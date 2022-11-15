@@ -14,4 +14,4 @@
 - _Flexbox_;
 - _Grid Layout_
 
-Ссылка на GitHub:
+Ссылка на GitHub: https://alexander-lukmanov.github.io/mesto/
