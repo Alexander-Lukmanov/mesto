@@ -1,0 +1,26 @@
+.profile__info {
+  /* grid-template-columns: auto;
+  justify-items: flex-start;
+  align-items: center;
+  grid-area: info;
+  grid-template-areas:
+    "name edit-button"
+    "career career";*/
+  display: grid;
+  grid-template-columns: minmax(min-content, max-content) minmax(18px, 24px);
+
+  align-items: baseline;
+  grid-template-areas:
+    "name edit-button"
+    "career career";
+}
+
+@media screen and (max-width: 896px) {
+  .profile__info {
+    margin-top: 26px;
+    grid-template-columns: minmax(18px, 24px) minmax(min-content, max-content) minmax(
+        18px,
+        24px
+      );
+  }
+}

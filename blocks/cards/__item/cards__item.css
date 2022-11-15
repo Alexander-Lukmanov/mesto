@@ -1,0 +1,25 @@
+.cards__item {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  max-width: 282px;
+  height: 361px;
+  border-radius: 10px;
+}
+
+/*.cards__item:nth-child(3n + 3) {
+  margin-right: 0;
+}
+
+.cards__item:nth-child(n + 4) {
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 880px) {
+  .cards__item:nth-child(even) {
+    margin-right: 0;
+  }
+  .cards__item:nth-child(n + 3) {
+    margin-top: 20px;
+  }
+}*/
