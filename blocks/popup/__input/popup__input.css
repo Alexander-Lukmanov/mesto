@@ -1,4 +1,4 @@
-.popup__input-name {
+.popup__input {
   box-sizing: border-box;
   height: 40px;
   padding: 0;
@@ -8,4 +8,8 @@
   font-size: 14px;
   line-height: 1.21;
   outline: none;
+}
+
+.popup__input:last-of-type {
+  margin-top: 17px;
 }

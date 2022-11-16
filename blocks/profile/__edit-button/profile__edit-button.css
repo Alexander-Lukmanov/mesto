@@ -10,6 +10,7 @@
   height: 24px;
   margin-left: 18px;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .profile__edit-button:hover {
@@ -17,7 +18,7 @@
   transition: 0.7s;
 }
 
-@media screen and (max-width: 544px) {
+@media screen and (max-width: 630px) {
   .profile__edit-button {
     width: 18px;
     height: 18px;

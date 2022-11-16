@@ -5,6 +5,10 @@
   color: #fff;
   margin: 9px 0 0;
   grid-area: career;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 500px;
 }
 
 @media screen and (max-width: 896px) {
@@ -14,8 +18,9 @@
   }
 }
 
-@media screen and (max-width: 544px) {
+@media screen and (max-width: 630px) {
   .profile__profession {
     font-size: 14px;
+    max-width: 225px;
   }
 }
