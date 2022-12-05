@@ -1,6 +1,6 @@
 .cards__like-button {
   background-image: url(../../../images/like-disabled.svg);
-  background-color: #fff;
+  background-color: transparent;
   width: 22px;
   height: 19px;
   border: none;
@@ -10,5 +10,5 @@
 
 .cards__like-button:hover {
   opacity: 0.5;
-  transition: 0.7s;
+  transition: 0.5s;
 }
