@@ -105,12 +105,14 @@
               name="profile-name"
               value="Жак-Ив Кусто"
               class="popup__input"
+              placeholder="Имя"
             />
             <input
               type="text"
               name="profile-profession"
               value="Исследователь океана"
               class="popup__input"
+              placeholder="Род деятельности"
             />
             <button
               type="submit"
@@ -130,14 +132,16 @@
             <input
               type="text"
               name="title-card"
-              value="Название"
+              value=""
               class="popup__input"
+              placeholder="Название"
             />
             <input
               type="text"
               name="link-image"
-              value="Ссылка на картинку"
+              value=""
               class="popup__input"
+              placeholder="Ссылка на картинку"
             />
             <button
               type="submit"
@@ -148,6 +152,13 @@
             </button>
           </form>
         </div>
+      </section>
+      <section class="popup popup__photo popup__photo_opened">
+        <figure class="popup__figure">
+          <button type="button" class="popup__close-button"></button>
+          <img class="popup__figure-img" src="" alt="" />
+          <figcaption class="popup__figcaption"></figcaption>
+        </figure>
       </section>
     </main>
     <footer class="footer">

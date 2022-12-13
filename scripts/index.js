@@ -25,23 +25,33 @@ const initialCards = [
   },
 ];
 
-let editProfileButton = document.querySelector(".profile__edit-button");
+const editProfileButton = document.querySelector(".profile__edit-button");
 const addCardButton = document.querySelector(".profile__add-button");
-let popup = document.querySelector(".popup");
+const popup = document.querySelector(".popup");
 const popupEditProfile = document.querySelector(".popup_edit-profile");
 const popupAddCard = document.querySelector(".popup_add-card");
-let closePopupEditProfileButton = popupEditProfile.querySelector(
+
+const popupPhoto = document.querySelector(".popup__photo");
+const popupPhotoImage = document.querySelector(".popup__figure-img");
+const popupPhotoCaption = document.querySelector(".popup__figcaption");
+
+const closePopupPhotoButton = popupPhoto.querySelector(".popup__close-button");
+const closePopupEditProfileButton = popupEditProfile.querySelector(
   ".popup__close-button"
 );
-let closePopupAddCartButton = popupAddCard.querySelector(
+const closePopupAddCartButton = popupAddCard.querySelector(
   ".popup__close-button"
 );
-let submitFormEditProfileButton = document.querySelector(
+const submitFormEditProfileButton = document.querySelector(
   '[name="submit-edit-profile"]'
 );
 const submitFormAddCardButton = document.querySelector(
   '[name="submit-add-card"]'
 );
+
+const togglePopupPhoto = () => {
+  popupPhoto.classList.toggle("popup__photo_opened");
+};
 
 const toggleEditProfilePopup = () => {
   popupEditProfile.classList.toggle("popup_edit-profile_opened");
@@ -55,10 +65,12 @@ addCardButton.addEventListener("click", toggleAddCardPopup);
 editProfileButton.addEventListener("click", toggleEditProfilePopup);
 closePopupAddCartButton.addEventListener("click", toggleAddCardPopup);
 closePopupEditProfileButton.addEventListener("click", toggleEditProfilePopup);
+closePopupPhotoButton.addEventListener("click", togglePopupPhoto);
+
 //
-let formEditProfile = document.querySelector(".popup__form-edit-profile");
-let profileNameInput = formEditProfile.querySelector('[name="profile-name"]');
-let profileJobInput = formEditProfile.querySelector(
+const formEditProfile = document.querySelector(".popup__form-edit-profile");
+const profileNameInput = formEditProfile.querySelector('[name="profile-name"]');
+const profileJobInput = formEditProfile.querySelector(
   '[name="profile-profession"]'
 );
 
@@ -68,8 +80,8 @@ function formEditProfileSubmitHandler(evt) {
   profileJobInput.getAttribute("value");
   profileNameInput.getAttribute("value");
 
-  let nameProfileElement = document.querySelector(".profile__name");
-  let jobProfileElement = document.querySelector(".profile__profession");
+  const nameProfileElement = document.querySelector(".profile__name");
+  const jobProfileElement = document.querySelector(".profile__profession");
 
   nameProfileElement.textContent = profileNameInput.value;
   jobProfileElement.textContent = profileJobInput.value;
@@ -91,9 +103,17 @@ function createElement(item) {
   const cardLikeButton = card.querySelector(".cards__like-button");
   const cardDeleteButton = card.querySelector(".cards__trash-button");
   cardImage.src = item.link;
+  cardImage.alt = item.name;
   cardTitle.textContent = item.name;
+
   cardLikeButton.addEventListener("click", cardLikeButtonClick);
   cardDeleteButton.addEventListener("click", cardDeleteButtonClick);
+
+  cardImage.addEventListener("click", function () {
+    togglePopupPhoto();
+    popupPhotoImage.src = cardImage.src;
+    popupPhotoCaption.textContent = cardImage.alt;
+  });
 
   return card;
 }
@@ -131,3 +151,5 @@ function formAddCardSubmitHandler(e) {
 
 formAddCard.addEventListener("submit", formAddCardSubmitHandler);
 submitFormAddCardButton.addEventListener("click", toggleAddCardPopup);
+
+//
