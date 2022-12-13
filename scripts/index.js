@@ -31,7 +31,7 @@ const popup = document.querySelector(".popup");
 const popupEditProfile = document.querySelector(".popup_edit-profile");
 const popupAddCard = document.querySelector(".popup_add-card");
 
-const popupPhoto = document.querySelector(".popup__photo");
+const popupPhoto = document.querySelector(".popup_photo");
 const popupPhotoImage = document.querySelector(".popup__figure-img");
 const popupPhotoCaption = document.querySelector(".popup__figcaption");
 
