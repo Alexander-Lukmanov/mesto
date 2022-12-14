@@ -89,11 +89,8 @@ function formEditProfileSubmitHandler(evt) {
 
   nameProfileElement.textContent = profileNameInput.value;
   jobProfileElement.textContent = profileJobInput.value;
-}
-
-submitFormEditProfileButton.addEventListener("click", function () {
   togglePopup(popupEditProfile);
-});
+}
 
 formEditProfile.addEventListener("submit", formEditProfileSubmitHandler);
 //
