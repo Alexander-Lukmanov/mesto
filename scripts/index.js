@@ -24,7 +24,8 @@ const initialCards = [
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
   },
 ];
-
+const popup = document.querySelector(".popup");
+const popupContainer = document.querySelector(".popup__container");
 const profileEditButton = document.querySelector(".profile__edit-button");
 const cardAddButton = document.querySelector(".profile__add-button");
 const popupEditProfile = document.querySelector(".popup_edit-profile");
@@ -48,28 +49,48 @@ const submitFormAddCardButton = document.querySelector(
 
 /////////////////////////////////////////////
 
-function togglePopup(popup) {
-  popup.classList.toggle("popup_opened");
+function openPopup(popup) {
+  popup.classList.add("popup_opened");
 }
 
+function closePopup(popup) {
+  popup.classList.remove("popup_opened");
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closePopup(popupPhoto);
+    closePopup(popupAddCard);
+    closePopup(popupEditProfile);
+  }
+});
+
+document.addEventListener("click", function (evt) {
+  if (evt.target.classList.contains("popup")) {
+    closePopup(popupPhoto);
+    closePopup(popupAddCard);
+    closePopup(popupEditProfile);
+  }
+});
+
 cardAddButton.addEventListener("click", function () {
-  togglePopup(popupAddCard);
+  openPopup(popupAddCard);
 });
 closePopupAddCartButton.addEventListener("click", function () {
-  togglePopup(popupAddCard);
+  closePopup(popupAddCard);
 });
 
 profileEditButton.addEventListener("click", function () {
   profileNameInput.value = nameProfileElement.textContent;
   profileJobInput.value = jobProfileElement.textContent;
-  togglePopup(popupEditProfile);
+  openPopup(popupEditProfile);
 });
 closePopupEditProfileButton.addEventListener("click", function () {
-  togglePopup(popupEditProfile);
+  closePopup(popupEditProfile);
 });
 
 closePopupPhotoButton.addEventListener("click", function () {
-  togglePopup(popupPhoto);
+  closePopup(popupPhoto);
 });
 
 //
@@ -89,7 +110,7 @@ function formEditProfileSubmitHandler(evt) {
 
   nameProfileElement.textContent = profileNameInput.value;
   jobProfileElement.textContent = profileJobInput.value;
-  togglePopup(popupEditProfile);
+  closePopup(popupEditProfile);
 }
 
 formEditProfile.addEventListener("submit", formEditProfileSubmitHandler);
@@ -114,7 +135,7 @@ function createElement(item) {
   cardDeleteButton.addEventListener("click", cardDeleteButtonClick);
 
   cardImage.addEventListener("click", function () {
-    togglePopup(popupPhoto);
+    openPopup(popupPhoto);
     popupPhotoImage.src = cardImage.src;
     popupPhotoImage.alt = cardImage.alt;
     popupPhotoCaption.textContent = cardImage.alt;
@@ -155,9 +176,9 @@ function formAddCardSubmitHandler(e) {
 
   titleCardInput.value = "";
   linkImageInput.value = "";
-  togglePopup(popupAddCard);
+  closePopup(popupAddCard);
 }
 
 formAddCard.addEventListener("submit", formAddCardSubmitHandler);
 
-//
+////////////////////////////////////////////////////////////////

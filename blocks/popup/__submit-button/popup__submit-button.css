@@ -9,6 +9,7 @@
   background-color: #000;
   border: #000;
   border-radius: 2px;
+  opacity: 1;
 }
 
 .popup__submit-button:hover {
