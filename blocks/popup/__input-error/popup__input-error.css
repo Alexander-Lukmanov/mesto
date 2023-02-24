@@ -3,4 +3,6 @@
   color: #ff0000;
   margin-top: 8px;
   opacity: 0;
+  display: block;
+  min-height: 28px;
 }
