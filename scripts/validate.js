@@ -21,6 +21,11 @@ const hideInputError = (formElement, inputElement) => {
   errorElement.textContent = "";
 };
 
+const disableSubmitButton = (buttonSubmit) => {
+  buttonSubmit.setAttribute("disabled", "disabled");
+  buttonSubmit.classList.add(formsConfig.inactiveButtonClass);
+};
+
 const setEventListeners = (formElement) => {
   const inputList = Array.from(
     formElement.querySelectorAll(formsConfig.inputSelector)
@@ -28,6 +33,7 @@ const setEventListeners = (formElement) => {
   const buttonElement = formElement.querySelector(
     formsConfig.submitButtonSelector
   );
+
   toogleButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
@@ -41,9 +47,14 @@ const enableValidation = () => {
   const formList = Array.from(
     document.querySelectorAll(formsConfig.formSelector)
   );
+
   formList.forEach((formElement) => {
+    const buttonElement = formElement.querySelector(
+      formsConfig.submitButtonSelector
+    );
     formElement.addEventListener("submit", function (e) {
       e.preventDefault();
+      disableSubmitButton(buttonElement);
     });
     setEventListeners(formElement);
   });

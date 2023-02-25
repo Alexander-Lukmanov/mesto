@@ -33,34 +33,27 @@ const popupAddCard = document.querySelector(".popup_add-card");
 const popupPhoto = document.querySelector(".popup_photo");
 const popupPhotoImage = document.querySelector(".popup__figure-img");
 const popupPhotoCaption = document.querySelector(".popup__figcaption");
-const closePopupPhotoButton = popupPhoto.querySelector(".popup__close-button");
-const closePopupEditProfileButton = popupEditProfile.querySelector(
+const buttonClosePopupPhoto = popupPhoto.querySelector(".popup__close-button");
+const buttonClosePopupEditProfile = popupEditProfile.querySelector(
   ".popup__close-button"
 );
-const closePopupAddCartButton = popupAddCard.querySelector(
+const buttonClosePopupAddCart = popupAddCard.querySelector(
   ".popup__close-button"
 );
-const submitFormEditProfileButton = document.querySelector(
+const buttonSubmitFormEditProfile = document.querySelector(
   '[name="submit-edit-profile"]'
 );
 
-const submitFormAddCardButton = document.querySelector(
+const buttonSubmitFormAddCart = document.querySelector(
   '[name="submit-add-card"]'
 );
 
 /////////////////////////////////////////////
-function disableSubmitButton() {
-  submitFormEditProfileButton.setAttribute("disabled", "disabled");
-  submitFormAddCardButton.setAttribute("disabled", "disabled");
-  submitFormEditProfileButton.classList.add(formsConfig.inactiveButtonClass);
-  submitFormAddCardButton.classList.add(formsConfig.inactiveButtonClass);
-}
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", closeByEsc);
   document.addEventListener("click", closePopupOutsideClick);
-  disableSubmitButton();
 }
 
 function closePopup(popup) {
@@ -86,7 +79,7 @@ function closePopupOutsideClick(e) {
 cardAddButton.addEventListener("click", function () {
   openPopup(popupAddCard);
 });
-closePopupAddCartButton.addEventListener("click", function () {
+buttonClosePopupAddCart.addEventListener("click", function () {
   closePopup(popupAddCard);
 });
 
@@ -95,11 +88,11 @@ profileEditButton.addEventListener("click", function () {
   profileJobInput.value = jobProfileElement.textContent;
   openPopup(popupEditProfile);
 });
-closePopupEditProfileButton.addEventListener("click", function () {
+buttonClosePopupEditProfile.addEventListener("click", function () {
   closePopup(popupEditProfile);
 });
 
-closePopupPhotoButton.addEventListener("click", function () {
+buttonClosePopupPhoto.addEventListener("click", function () {
   closePopup(popupPhoto);
 });
 
@@ -137,8 +130,8 @@ function createElement(item) {
   cardImage.alt = item.name;
   cardTitle.textContent = item.name;
 
-  cardLikeButton.addEventListener("click", cardLikeButtonClick);
-  cardDeleteButton.addEventListener("click", cardDeleteButtonClick);
+  cardLikeButton.addEventListener("click", clickButtonLikeCard);
+  cardDeleteButton.addEventListener("click", clickButtonDeleteCard);
 
   cardImage.addEventListener("click", function () {
     popupPhotoImage.src = cardImage.src;
@@ -150,11 +143,11 @@ function createElement(item) {
   return card;
 }
 
-const cardLikeButtonClick = (e) => {
+const clickButtonLikeCard = (e) => {
   e.target.classList.toggle("cards__like-button_active");
 };
 
-const cardDeleteButtonClick = (e) => {
+const clickButtonDeleteCard = (e) => {
   e.target.closest(".cards__item").remove();
 };
 
