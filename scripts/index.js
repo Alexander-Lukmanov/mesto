@@ -1,3 +1,6 @@
+import { Card } from "./card.js";
+import { FormValidator } from "./FormValidator.js";
+
 const initialCards = [
   {
     name: "Архыз",
@@ -24,33 +27,46 @@ const initialCards = [
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
   },
 ];
-const popup = document.querySelector(".popup");
-const popupContainer = document.querySelector(".popup__container");
-const profileEditButton = document.querySelector(".profile__edit-button");
-const cardAddButton = document.querySelector(".profile__add-button");
-const popupEditProfile = document.querySelector(".popup_edit-profile");
-const popupAddCard = document.querySelector(".popup_add-card");
-const popupPhoto = document.querySelector(".popup_photo");
-const popupPhotoImage = document.querySelector(".popup__figure-img");
-const popupPhotoCaption = document.querySelector(".popup__figcaption");
-const buttonClosePopupPhoto = popupPhoto.querySelector(".popup__close-button");
-const buttonClosePopupEditProfile = popupEditProfile.querySelector(
+const formsConfig = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit-button",
+  inactiveButtonClass: "popup__submit-button_inactive",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__input-error_active",
+};
+
+export const popup = document.querySelector(".popup");
+export const popupContainer = document.querySelector(".popup__container");
+export const profileEditButton = document.querySelector(
+  ".profile__edit-button"
+);
+export const cardAddButton = document.querySelector(".profile__add-button");
+export const popupEditProfile = document.querySelector(".popup_edit-profile");
+export const popupAddCard = document.querySelector(".popup_add-card");
+export const popupPhoto = document.querySelector(".popup_photo");
+export const popupPhotoImage = document.querySelector(".popup__figure-img");
+export const popupPhotoCaption = document.querySelector(".popup__figcaption");
+export const buttonClosePopupPhoto = popupPhoto.querySelector(
   ".popup__close-button"
 );
-const buttonClosePopupAddCart = popupAddCard.querySelector(
+export const buttonClosePopupEditProfile = popupEditProfile.querySelector(
   ".popup__close-button"
 );
-const buttonSubmitFormEditProfile = document.querySelector(
+export const buttonClosePopupAddCart = popupAddCard.querySelector(
+  ".popup__close-button"
+);
+export const buttonSubmitFormEditProfile = document.querySelector(
   '[name="submit-edit-profile"]'
 );
 
-const buttonSubmitFormAddCart = document.querySelector(
+export const buttonSubmitFormAddCart = document.querySelector(
   '[name="submit-add-card"]'
 );
 
 /////////////////////////////////////////////
 
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", closeByEsc);
   document.addEventListener("click", closePopupOutsideClick);
@@ -120,40 +136,10 @@ const cardTemplate = document
   .querySelector("#card-template")
   .content.querySelector(".cards__item");
 
-function createElement(item) {
-  const card = cardTemplate.cloneNode(true);
-  const cardTitle = card.querySelector(".cards__title");
-  const cardImage = card.querySelector(".cards__image");
-  const cardLikeButton = card.querySelector(".cards__like-button");
-  const cardDeleteButton = card.querySelector(".cards__trash-button");
-  cardImage.src = item.link;
-  cardImage.alt = item.name;
-  cardTitle.textContent = item.name;
-
-  cardLikeButton.addEventListener("click", clickButtonLikeCard);
-  cardDeleteButton.addEventListener("click", clickButtonDeleteCard);
-
-  cardImage.addEventListener("click", function () {
-    popupPhotoImage.src = cardImage.src;
-    popupPhotoImage.alt = cardImage.alt;
-    popupPhotoCaption.textContent = cardImage.alt;
-    openPopup(popupPhoto);
-  });
-
-  return card;
-}
-
-const clickButtonLikeCard = (e) => {
-  e.target.classList.toggle("cards__like-button_active");
-};
-
-const clickButtonDeleteCard = (e) => {
-  e.target.closest(".cards__item").remove();
-};
-
 const renderCard = (item) => {
-  const element = createElement(item);
-  cardsContainer.prepend(element);
+  const card = new Card(item, cardTemplate);
+  const cardElement = card.createCard();
+  cardsContainer.append(cardElement);
 };
 
 initialCards.forEach(function (item) {
@@ -178,5 +164,7 @@ function addCardSubmitHandler(e) {
 }
 
 formAddCard.addEventListener("submit", addCardSubmitHandler);
+const formValidator = new FormValidator(formsConfig, ".popup__form");
+formValidator.enableValidation();
 
 ////////////////////////////////////////////////////////////////
