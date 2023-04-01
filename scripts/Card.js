@@ -9,19 +9,27 @@ export class Card {
 
   _getTemplate() {
     const cardTemplate = document
-      .querySelector("#card-template")
+      .querySelector(this._templateSelector)
       .content.querySelector(".cards__item")
       .cloneNode(true);
 
     return cardTemplate;
   }
 
-  _clickButtonLikeCard = (e) => {
-    e.target.classList.toggle("cards__like-button_active");
+  _clickButtonLikeCard = () => {
+    this._likeButton.classList.toggle("cards__like-button_active");
   };
 
-  _clickButtonDeleteCard = (e) => {
-    e.target.closest(".cards__item").remove();
+  _clickButtonDeleteCard = () => {
+    this._element.remove();
+    this._element = null;
+  };
+
+  _openPopupPhoto = () => {
+    popupPhotoImage.src = this._cardImage.src;
+    popupPhotoImage.alt = this._cardImage.alt;
+    popupPhotoCaption.textContent = this._cardImage.alt;
+    openPopup(popupPhoto);
   };
 
   _setEventListeners() {
@@ -33,20 +41,17 @@ export class Card {
       .addEventListener("click", this._clickButtonDeleteCard);
     this._element
       .querySelector(".cards__image")
-      .addEventListener("click", () => {
-        popupPhotoImage.src = this._element.querySelector(".cards__image").src;
-        popupPhotoImage.alt = this._element.querySelector(".cards__image").alt;
-        popupPhotoCaption.textContent =
-          this._element.querySelector(".cards__image").alt;
-        openPopup(popupPhoto);
-      });
+      .addEventListener("click", this._openPopupPhoto);
   }
 
   createCard() {
     this._element = this._getTemplate();
-    this._element.querySelector(".cards__image").src = this._link;
-    this._element.querySelector(".cards__image").alt = this._name;
-    this._element.querySelector(".cards__title").textContent = this._name;
+    this._likeButton = this._element.querySelector(".cards__like-button");
+    this._cardImage = this._element.querySelector(".cards__image");
+    this._cardTitle = this._element.querySelector(".cards__title");
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
+    this._cardTitle.textContent = this._name;
 
     this._setEventListeners();
     return this._element;
