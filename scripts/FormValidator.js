@@ -26,9 +26,14 @@ export class FormValidator {
     errorElement.textContent = "";
   };
 
-  _disableSubmitButton = (buttonSubmit) => {
-    buttonSubmit.setAttribute("disabled", "disabled");
-    buttonSubmit.classList.add(this._inactiveButtonClass);
+  _disableSubmitButton = () => {
+    this._buttonElement.setAttribute("disabled", "disabled");
+    this._buttonElement.classList.add(this._inactiveButtonClass);
+  };
+
+  _enableSubmitButton = () => {
+    this._buttonElement.classList.remove(this._inactiveButtonClass);
+    this._buttonElement.removeAttribute("disabled");
   };
 
   _checkInputValidity = (inputElement) => {
@@ -46,12 +51,10 @@ export class FormValidator {
   };
 
   _toogleButtonState = () => {
-    if (this._hasInvalidInput(this._inputList)) {
-      this._buttonElement.classList.add(this._inactiveButtonClass);
-      this._buttonElement.setAttribute("disabled", "disabled");
+    if (this._hasInvalidInput()) {
+      this._disableSubmitButton();
     } else {
-      this._buttonElement.classList.remove(this._inactiveButtonClass);
-      this._buttonElement.removeAttribute("disabled");
+      this._enableSubmitButton();
     }
   };
 

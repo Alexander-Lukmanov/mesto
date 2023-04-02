@@ -41,7 +41,6 @@ const buttonLikeCard = document.querySelector(".cards__like-button");
 export function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", closeByEsc);
-  popup.addEventListener("click", closePopupOutsideClick);
 }
 
 function closePopup(popup) {
@@ -61,6 +60,10 @@ function closePopupOutsideClick(e) {
     closePopup(e.target);
   }
 }
+
+popupEditProfile.addEventListener("click", closePopupOutsideClick);
+popupAddCard.addEventListener("click", closePopupOutsideClick);
+popupPhoto.addEventListener("click", closePopupOutsideClick);
 
 cardAddButton.addEventListener("click", function () {
   openPopup(popupAddCard);
@@ -106,13 +109,15 @@ const cardsContainer = document.querySelector(".cards");
 const createCard = (item) => {
   const card = new Card(item, "#card-template");
   const cardElement = card.createCard();
-  cardsContainer.prepend(cardElement);
-  return card;
+  return cardElement;
 };
 
-initialCards.forEach(function (item) {
-  createCard(item);
-});
+const renderCard = (item) => {
+  const cardElement = createCard(item);
+  cardsContainer.prepend(cardElement);
+};
+
+initialCards.forEach(renderCard);
 
 const formAddCard = document.querySelector(".popup__form-add-card");
 const titleCardInput = formAddCard.querySelector('[name="title-card"]');
@@ -125,7 +130,7 @@ function addCardSubmitHandler(e) {
     name: titleCardInput.value,
     link: linkImageInput.value,
   };
-  createCard(newCardObject);
+  renderCard(newCardObject);
   closePopup(popupAddCard);
   titleCardInput.value = "";
   linkImageInput.value = "";
