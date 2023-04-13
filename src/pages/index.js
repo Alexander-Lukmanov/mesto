@@ -55,8 +55,8 @@ cardsSection.renderItems();
 ////////////////////////////////////////////////////////////////////////////
 
 const userInfo = new UserInfo({
-  userNameElement: ".profile__name",
-  userInfoElement: ".profile__profession",
+  userNameSelector: ".profile__name",
+  userInfoSelector: ".profile__profession",
 });
 
 ///////////////////////////////////////////////////////////////////////////
@@ -67,6 +67,7 @@ const popupEditProfile = new PopupWithForm(".popup_edit-profile", {
       name: data.name,
       info: data.info,
     });
+    popupFormEditProfileValidator.disableSubmitButton();
   },
 });
 popupEditProfile.setEventListeners();
@@ -82,8 +83,8 @@ profileEditButton.addEventListener("click", () => {
 
 const popupAddCard = new PopupWithForm(".popup_add-card", {
   handleSubmit: ({ titleCard, linkImage }) => {
-    console.log({ titleCard, linkImage });
     cardsSection.addItem(createCard({ name: titleCard, link: linkImage }));
+    popupFormAddCardValidator.disableSubmitButton();
   },
 });
 
